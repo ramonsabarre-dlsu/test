@@ -14,10 +14,8 @@ pipeline {
         stage('Build'){
             steps{
                 bat 'mkdir lib'
-                cd lib
-                bat 'wget https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/1.7.0/junit-platform-console-standalone-1.7.0-all.jar'
-                cd src
-                bat 'javac -cp "../lib/junit-platform-console-standalone-1.7.0-all.jar" CalculatorTest.java Calculator.java main.java'
+                bat 'cd lib/ ; wget https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/1.7.0/junit-platform-console-standalone-1.7.0-all.jar'
+                bat 'cd src ; javac -cp "../lib/junit-platform-console-standalone-1.7.0-all.jar" CalculatorTest.java Calculator.java main.java'
             }
         }
 
