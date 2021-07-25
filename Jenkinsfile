@@ -13,24 +13,20 @@ pipeline {
 
         stage('Build'){
             steps{
-                bat 'md lib'
-                bat 'cd lib'
-                bat  'wget https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/1.7.0/junit-platform-console-standalone-1.7.0-all.jar'
-                bat 'cd src' 
                 bat 'javac -cp "../lib/junit-platform-console-standalone-1.7.0-all.jar" CalculatorTest.java Calculator.java main.java'
             }
         }
 
         stage('Test'){
             steps{
-                bat 'cd src/ ; java -jar ../lib/junit-platform-console-standalone-1.7.0-all.jar -cp "." --select-class CalculatorTest --reports-dir="reports"'
+                bat 'java -jar ../lib/junit-platform-console-standalone-1.7.0-all.jar -cp "." --select-class CalculatorTest --reports-dir="reports"'
                 junit 'src/reports/*-jupiter.xml'
             }
         }
 
         stage('Deploy'){
             steps{
-                bat 'cd src/ ; java main' 
+                bat 'java main' 
             }
         }
     }
